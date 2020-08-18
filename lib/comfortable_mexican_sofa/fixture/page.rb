@@ -115,8 +115,7 @@ module ComfortableMexicanSofa::Fixture::Page
             'is_published'   => page.is_published,
             'position'       => page.position,
             'created_at'     => page.created_at.to_s,
-            'updated_at'     => page.updated_at.to_s,
-            'published_date' => page.published_date
+            'updated_at'     => page.updated_at.to_s
           }.to_yaml)
         end
         page.blocks_attributes.each do |block|
