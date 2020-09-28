@@ -49,12 +49,12 @@ module ComfortableMexicanSofa::Fixture::File
       prepare_folder!(self.path)
 
       self.site.files.each do |file|
-        file_path = File.join(self.path, file.file_file_name)
+        file_path = File.join(self.path, "#{file.id}_#{file.file_file_name}")
         block = file.block
         page = block.present?? block.blockable : nil
 
         # writing attributes
-        open(::File.join(self.path, "_#{file.file_file_name}.yml"), 'w') do |f|
+        open(::File.join(self.path, "_#{file.id}_#{file.file_file_name}.yml"), 'w') do |f|
           f.write({
             'label'       => file.label,
             'description' => file.description,

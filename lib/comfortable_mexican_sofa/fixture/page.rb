@@ -129,5 +129,3 @@ module ComfortableMexicanSofa::Fixture::Page
     end
   end
 end
-
-
