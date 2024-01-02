@@ -4,14 +4,18 @@ module Comfy
   module CmsHelper
     def url_for_cms(blob)
       if Rails.env.development? || Rails.env.test?
-        if blob.is_a?(ActiveStorage::Variant)
+        # In Rails 6.1, the configuration to allow variant tracking in the database is by default set to true.
+        # this is causing blob to be a ActiveStorage::VariantWithRecord instead of ActiveStorage::Variant
+        if blob.is_a?(ActiveStorage::Variant) || blob.is_a?(ActiveStorage::VariantWithRecord)
           return rails_representation_path(blob, only_path: true)
         else
           return rails_blob_path(blob, only_path: true)
         end
       end
 
-      if blob.is_a?(ActiveStorage::Variant)
+      # In Rails 6.1, the configuration to allow variant tracking in the database is by default set to true.
+      # this is causing blob to be a ActiveStorage::VariantWithRecord instead of ActiveStorage::Variant
+      if blob.is_a?(ActiveStorage::Variant) || blob.is_a?(ActiveStorage::VariantWithRecord)
         return Rails.application.routes.url_helpers.rails_public_blob_url(blob.blob)
       end
 
